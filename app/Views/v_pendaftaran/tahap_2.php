@@ -3,16 +3,18 @@
 <?= $this->section('header') ?>
 <header id="header" class="fixed-top">
   <div class="container d-flex align-items-center">
-    <img src="<?= base_url('/assets/logo.png'); ?>" width="55px">
-    <h1 class="logo mr-auto"><a href="#">E-Magang<span> Diskominfosan</span></a></h1>
+
+    <img src="<?= base_url('/assets/logo.png'); ?>" width="35px">
+    <h1 class="logo mr-auto"><a href="<?php echo base_url('/'); ?>">SI AMANG</a></h1>
+
     <nav class="nav-menu d-none d-lg-block">
       <ul>
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="<?php echo base_url('pendaftaran/logout'); ?>">Logout</a></li>
+        <li><a href="<?php echo base_url('pendaftaran/logout'); ?>"><i class='bx bx-log-out'></i> Logout</a></li>
       </ul>
-    </nav>
+    </nav><!-- .nav-menu -->
+
   </div>
-</header>
+</header><!-- End Header -->
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
@@ -44,9 +46,9 @@
           <form id="formBidangKategori" method="post" role="form" class="php-email-form">
             <input type="hidden" name="idPendaftaran" value="<?= $idPendaftaran; ?>" />
             <!-- Pilih bidang Dan kategori -->
-            <label for="tahun">Pilih Bidang Dan Kategori Pada Diskominfosan</label>
+            <label for="tahun">Pilih Bidang Dan Kategori Pada Diskominfosan<span style="color:red"> *</span></label>
             <div class="form-group">
-              <select class="form-control" name="bidang" id="bidang">
+              <select class="form-control" name="bidang" id="bidang" required>
                 <option value="<?= $IdBidang; ?>"><?= $nama_bidang; ?></option>
                 <?php foreach ($bidang as $fak) : ?>
                   <option value="<?= $fak['id']; ?>"><?= $fak['nama_bidang']; ?></option>
@@ -55,12 +57,11 @@
               <small id="bidang_error" class="form-text text-danger mb-3"></small>
             </div>
             <div class="form-group">
-              <select class="form-control" id="kategori" name="kategori">
+              <select class="form-control" name="kategori" id="kategori" required>
                 <option value="<?= $IdKategori; ?>"><?= $nama_kategori; ?></option>
               </select>
               <small id="kategori_error" class="form-text text-danger mb-3"></small>
             </div>
-
 
             <!-- Tombol Simpan -->
             <div class="mb-2">
@@ -77,13 +78,14 @@
     </div>
   </section>
 
+
 </main>
 <?= $this->endSection() ?>
 
 <?= $this->section('script') ?>
 <script>
   $(document).ready(function() {
-
+    $('#mentor-group').hide();
     //Menampilkan Pilihan kategori Berdasarkan bidang
     $('#bidang').on('change', function() {
       const id = $(this).val();
