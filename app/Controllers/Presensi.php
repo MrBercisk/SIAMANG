@@ -78,33 +78,45 @@ class Presensi extends BaseController
 
         // megambil data dari tbl_pendaftaran, tbl_jadwal, tbl_user, dan tbl_kategori
         $builder = $this->db->table('tbl_pendaftaran');
-        $builder->select('tbl_pendaftaran.nama_peserta, tbl_pendaftaran.bidang_id, tbl_pendaftaran.kategori_id, tbl_pendaftaran.nim, tbl_pendaftaran.alamat_peserta, tbl_pendaftaran.judul, tbl_pendaftaran.keahlian, tbl_pendaftaran.nomor_pendaftaran, tbl_pendaftaran.nama_kampus, tbl_pendaftaran.no_hp, tbl_pendaftaran.foto, tbl_pendaftaran.status_permohonan, tbl_pendaftaran.nama_anggota_1, tbl_pendaftaran.nama_anggota_2, tbl_user.nama, tbl_jadwal.tanggal_mulai, tbl_jadwal.tanggal_selesai, tbl_jadwal.tanggal_bimbingan, tbl_jadwal.jam_bimbingan, tbl_kategori.nama_kategori, tbl_bidang.nama_bidang');
+        $builder->select('tbl_pendaftaran.nama_peserta, tbl_pendaftaran.id, tbl_pendaftaran.bidang_id, tbl_pendaftaran.kategori_id, tbl_pendaftaran.nim, tbl_pendaftaran.alamat_peserta, tbl_pendaftaran.judul, tbl_pendaftaran.keahlian, tbl_pendaftaran.nomor_pendaftaran, tbl_pendaftaran.nama_kampus, tbl_pendaftaran.no_hp, tbl_pendaftaran.foto, tbl_pendaftaran.status_permohonan, tbl_pendaftaran.nama_anggota_1, tbl_pendaftaran.nama_anggota_2, tbl_user.nama, tbl_jadwal.tanggal_mulai, tbl_jadwal.tanggal_selesai, tbl_jadwal.tanggal_bimbingan, tbl_jadwal.jam_bimbingan, tbl_kategori.nama_kategori, tbl_bidang.nama_bidang');
         $builder->join('tbl_user', 'tbl_user.id = tbl_pendaftaran.user_id');
         $builder->join('tbl_jadwal', 'tbl_jadwal.pendaftaran_id = tbl_pendaftaran.id', 'left');
         $builder->join('tbl_bidang', 'tbl_bidang.id = tbl_pendaftaran.bidang_id', 'left'); // Menambahkan join dengan tbl_kategori
         $builder->join('tbl_kategori', 'tbl_kategori.id = tbl_pendaftaran.kategori_id', 'left'); // Menambahkan join dengan tbl_kategori
+        $builder->orderBy('tbl_jadwal.tanggal_bimbingan', 'asc');
         $builder->where('tbl_pendaftaran.user_id', $user_id);
         $query = $builder->get();
-        $data['pendaftaran'] = $query->getRow();
+        $data['pendaftaran'] = $query->getResult();
+
+        // var_dump($data['pendaftaran']);
+        // die;
+
+        $jadwal = $this->db->table('tbl_jadwal');
+        $jadwal->where('pendaftaran_id', $data['pendaftaran'][0]->id);
+        $jadwal->where('tanggal_bimbingan', date('Y-m-d'));
+        $query = $jadwal->get();
+        $data['jadwal'] = $query->getResult();
+
 
         // pengambilan data dari tbl_pendaftaran, tbl_user, dan tbl_kategori
-        $data['nama_peserta'] = $data['pendaftaran']->nama_peserta;
-        $data['nim'] = $data['pendaftaran']->nim;
-        $data['keahlian'] = $data['pendaftaran']->keahlian;
-        $data['foto'] = $data['pendaftaran']->foto;
-        $data['no_hp'] = $data['pendaftaran']->no_hp;
-        $data['judul'] = $data['pendaftaran']->judul;
-        $data['alamat_peserta'] = $data['pendaftaran']->alamat_peserta;
-        $data['nama_kampus'] = $data['pendaftaran']->nama_kampus;
-        $data['tanggal_mulai'] = $data['pendaftaran']->tanggal_mulai;
-        $data['tanggal_selesai'] = $data['pendaftaran']->tanggal_selesai;
-        $data['tanggal_bimbingan'] = $data['pendaftaran']->tanggal_bimbingan;
-        $data['jam_bimbingan'] = $data['pendaftaran']->jam_bimbingan;
-        $data['status_permohonan'] = $data['pendaftaran']->status_permohonan;
-        $data['nama_anggota_1'] = $data['pendaftaran']->nama_anggota_1;
-        $data['nama_anggota_2'] = $data['pendaftaran']->nama_anggota_2;
-        $data['nama_kategori'] = $data['pendaftaran']->nama_kategori;
-        $data['nama_bidang'] = $data['pendaftaran']->nama_bidang;
+        $data['nama_peserta'] = $data['pendaftaran'][0]->nama_peserta;
+        $data['nim'] = $data['pendaftaran'][0]->nim;
+        $data['keahlian'] = $data['pendaftaran'][0]->keahlian;
+        $data['foto'] = $data['pendaftaran'][0]->foto;
+        $data['no_hp'] = $data['pendaftaran'][0]->no_hp;
+        $data['judul'] = $data['pendaftaran'][0]->judul;
+        $data['alamat_peserta'] = $data['pendaftaran'][0]->alamat_peserta;
+        $data['nama_kampus'] = $data['pendaftaran'][0]->nama_kampus;
+        $data['tanggal_mulai'] = $data['pendaftaran'][0]->tanggal_mulai;
+        $data['tanggal_selesai'] = $data['pendaftaran'][0]->tanggal_selesai;
+        // $data['tanggal_bimbingan'] = $data['pendaftaran'][0]->tanggal_bimbingan;
+        $data['tanggal_bimbingan'] = $data['jadwal'];
+        $data['jam_bimbingan'] = $data['pendaftaran'][0]->jam_bimbingan;
+        $data['status_permohonan'] = $data['pendaftaran'][0]->status_permohonan;
+        $data['nama_anggota_1'] = $data['pendaftaran'][0]->nama_anggota_1;
+        $data['nama_anggota_2'] = $data['pendaftaran'][0]->nama_anggota_2;
+        $data['nama_kategori'] = $data['pendaftaran'][0]->nama_kategori;
+        $data['nama_bidang'] = $data['pendaftaran'][0]->nama_bidang;
         $kategori_id = $pendaftaran['kategori_id'];
         $data['mentor'] = $this->M_user->where('role_id', 2)->where('kategori_id', $kategori_id)->findAll();
 
@@ -138,7 +150,13 @@ class Presensi extends BaseController
                 $data['progressLaporan'] = ($progressMagang >= 100) ? 100 : 0; // Set progress laporan ke 80% jika laporan belum diupload, kecuali jika progress magang sudah mencapai 100%
             }
         }
-
+        $tanggal_sekarang = date('Y-m-d');
+        $ubah_tanggal = tgl_indonesia($tanggal_sekarang);
+        $hari_sekarang = date('l', strtotime($tanggal_sekarang));
+        
+        $data['ubah_tanggal'] = $ubah_tanggal;
+        $data['hari_sekarang'] = ubah_hari_ke_indonesia($hari_sekarang);
+        
 
         // mengambil data id pada tbl_user
         $builder = $this->db->table('tbl_user');
@@ -196,6 +214,8 @@ class Presensi extends BaseController
         }
         // Ambil data presensi berdasarkan user_id
         $data['data_presensi'] = $this->M_presensi->where('user_id', $user_id)->findAll();
+        // Hitung jumlah data presensi
+        $data['jumlah_presensi'] = count($data['data_presensi']);
 
         // Mendapatkan tanggal bimbingan sesuai dengan user_id
         $M_jadwal = new JadwalModel();
@@ -220,7 +240,6 @@ class Presensi extends BaseController
         // Mendapatkan tanggal bimbingan sesuai dengan user_id
         $M_presensi = new PresensiModel();
         $tanggal_bimbingan = $M_presensi->getTanggalBimbingan($user_id);
-
         // Periksa apakah tanggal_bimbingan valid
         if (!is_array($tanggal_bimbingan) || empty($tanggal_bimbingan)) {
             return redirect()->to('/presensi')->with('error', 'Tidak ada tanggal bimbingan yang tersedia');
@@ -231,8 +250,7 @@ class Presensi extends BaseController
 
         if ($jam > "09:00:00") {
             $keterangan_presensi = "Terlambat";
-            $status_presensi = "Tidak Hadir";
-
+            $status_presensi = "Hadir";
         } else {
             $keterangan_presensi = "Tepat Waktu";
             $status_presensi = "Hadir";

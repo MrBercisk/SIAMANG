@@ -203,6 +203,38 @@ class Validation
             ]
         ]
     ];
+    public $presensi = [
+        'tanggal_presensi' => [
+            'label'  => 'Tanggal Presensi',
+            'rules'  => 'required',
+            'errors' => [
+                'required' => 'Tanggal Presensi tidak boleh kosong!'
+            ]
+        ],
+        'keterangan_presensi' => [
+            'label'  => 'Keterangan Presensi',
+            'rules'  => 'required',
+            'errors' => [
+                'required' => 'Keterangan Presensi tidak boleh kosong!'
+            ]
+        ],
+        'tanggal_presensi' => [
+            'label'  => 'Tanggal Presensi',
+            'rules'  => 'required|is_unique[tbl_presensi.tanggal_presensi]',
+            'errors' => [
+                'required'   => 'Tanggal Presensi tidak boleh kosong!',
+                'is_unique'  => 'Tanggal Presensi sudah ada. Pilih tanggal yang berbeda.'
+            ]
+        ],
+        
+        'jam' => [
+            'label'  => 'Jam Presensi',
+            'rules'  => 'required',
+            'errors' => [
+                'required' => 'Jam Presensi tidak boleh kosong!'
+            ]
+        ],
+    ];
 
     //Validasi Data Kategori
     public $kategori = [
@@ -258,9 +290,10 @@ class Validation
     public $daftar_akun = [
         'nama' => [
             'label'  => 'Nama Lengkap',
-            'rules'  => 'required',
+            'rules'  => 'required|is_unique[tbl_user.nama]',
             'errors' => [
-                'required' => 'Nama Lengkap Tidak Boleh Kosong!'
+                'required' => 'Nama Lengkap Tidak Boleh Kosong!',
+                'is_unique' => 'Nama Sudah Terdaftar!'
             ]
         ],
         'email' => [

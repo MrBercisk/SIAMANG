@@ -372,9 +372,6 @@ svg {
   visibility: visible;
 }
 
-.member .member-img img {
-  margin-left: 20px;
-}
 /*--------------------------------------------------------------
 # Back to top button
 --------------------------------------------------------------*/
@@ -383,15 +380,12 @@ svg {
 # Disable aos animation delay on mobile devices
 --------------------------------------------------------------*/
 @media (max-width: 992px) {
-
- }
-  
+}
 
 @media screen and (max-width: 768px) {
   [data-aos-delay] {
     transition-delay: 0 !important;
   }
-  
 }
 
 /*--------------------------------------------------------------
@@ -763,13 +757,13 @@ svg {
   #hero .row {
     flex-direction: column-reverse;
   }
-  
+
   #hero .text {
     text-align: center;
     padding-bottom: 200px;
     margin-bottom: 20px;
   }
-  
+
   #hero .animasi {
     width: 100%;
     max-width: 400px;
@@ -785,9 +779,7 @@ svg {
     text-align: center;
     margin-bottom: 20px;
   }
-  
 }
-
 
 #hero h1 {
   margin-top: 20px;
@@ -829,7 +821,6 @@ svg {
   color: #42a895;
 }
 
-
 @media (min-width: 1024px) {
   #hero {
     background-attachment: fixed;
@@ -868,7 +859,6 @@ section {
   padding: 60px 0;
   overflow: hidden;
 }
-
 
 .section-title {
   text-align: center;
@@ -1813,6 +1803,21 @@ section {
 /*--------------------------------------------------------------
 # Contact
 --------------------------------------------------------------*/
+@media (max-width: 992px) {
+  .contact .member {
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .contact .member-img {
+    display: inline-block;
+  }
+
+  .contact .profile-username {
+    text-align: center;
+  }
+}
+
 .contact .info-box {
   color: #444444;
   text-align: center;

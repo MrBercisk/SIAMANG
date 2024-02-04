@@ -130,7 +130,6 @@
             if (data.tahap_dua_error['kategori_id'] != '') $('#kategori_error').html(data.tahap_dua_error['kategori_id']);
             else $('#kategori_error').html('');
 
-
           }
           //Pendaftaran tahap dua sukses
           if (data.success) {

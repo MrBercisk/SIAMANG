@@ -106,43 +106,32 @@
                                     <h3 class="card-title">Progress Magang Mahasiswa</h3>
                                 </div>
                                 <div class="p-5">
-                                    <form class="row g-3 needs-validation" action="/progressmagang/create" method="POST" enctype="multipart/form-data" novalidate>
+                                    <form class="row g-3 needs-validation" action="/progressmagang/create" method="POST" enctype="multipart/form-data">
                                         <div class="col-md-6">
                                             <label for="judul" class="form-label">Judul Project</label>
-                                            <input type="text" name="judul" value="<?php echo $judul; ?>" class="form-control" id="judul" readonly required>
+                                            <input type="text" name="judul" value="<?php echo $judul; ?>" class="form-control" id="judul" readonly>
                                             <div class="invalid-feedback">
                                                 Mohon isi judul project.
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="tgl_bimbingan" class="form-label">Tanggal Bimbingan</label>
+                                            <label for="tgl_bimbingan" class="form-label">Tanggal Bimbingan<span style="color:red"> *</span></label>
                                             <input type="date" class="form-control" id="tgl_bimbingan" name="tgl_bimbingan" required>
-                                            <div class="invalid-feedback">
-                                                Mohon isi tanggal bimbingan.
-                                            </div>
                                         </div>
                                         <div class="col-12 mt-2">
-                                            <label for="pencapaian" class="form-label">Pencapaian</label>
-                                            <textarea class="form-control" id="pencapaian" name="pencapaian" required></textarea>
-                                            <div class="invalid-feedback">
-                                                Mohon isi pencapaian.
-                                            </div>
+                                            <label for="pencapaian" class="form-label">Pencapaian<span style="color:red"> *</span></label>
+                                            <textarea class="form-control" id="pencapaian" name="pencapaian" placeholder="Contoh : Progress Minggu 1 " required></textarea>
                                         </div>
                                         <div class="col-12 mt-2">
                                             <label for="catatan" class="form-label">Catatan</label>
-                                            <textarea class="form-control" id="catatan" name="catatan" required placeholder="Isi catatan jika ada catatan dari mentor saat bimbingan"></textarea>
+                                            <textarea class="form-control" id="catatan" name="catatan" placeholder="Isi catatan jika ada catatan dari mentor saat bimbingan"></textarea>
                                         </div>
                                         <div class="col-12 mt-2">
-                                            <label for="file_presentasi" class="form-label">File Presentasi (PDF)</label>
+                                            <label for="file_presentasi" class="form-label">File Presentasi (PDF)<span style="color:red"> *</span></label>
                                             <div class="input-group">
                                                 <input type="file" class="form-control" id="file_presentasi" name="file_presentasi" accept=".pdf" required>
                                             </div>
-                                            <div class="form-text text-muted mb-3">
-                                                File harus berformat PDF dan tidak lebih dari 2 MB.
-                                            </div>
-                                            <div class="invalid-feedback">
-                                                Mohon upload file presentasi (PDF).
-                                            </div>
+                                            <div class="form-text text-danger">** File harus berformat PDF dan tidak lebih dari 2 MB.</div>
                                         </div>
 
                                         <div class="col-12 d-flex justify-content-end">
@@ -150,8 +139,6 @@
                                                 <i class="fas fa-save"></i> Simpan
                                             </button>
                                         </div>
-
-
                                     </form>
 
                                     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>

@@ -39,7 +39,7 @@
           right: 'dayGridMonth,timeGridWeek,timeGridDay'
         },
         initialDate: new Date(),
-        editable: true,
+        editable: false,
         locale: 'id', // set bahasa ke bahasa Indonesia
         eventLimit: true,
         events: [
@@ -62,16 +62,28 @@
         eventTextColor: '#FFFFFF', // set warna teks event
         eventClick: function(info) {
           var event = info.event;
+          var eventId = event.extendedProps.id; // Ambil ID acara
+
           var detail = "<div style='background-color: #FFFFFF; border-radius: 10px; padding: 10px;'>" +
             "<div style='font-weight: bold;'>" + event.extendedProps.jam_bimbingan + " - " + event.extendedProps.tanggal_bimbingan + " - " + event.extendedProps.nama_peserta + " - " + event.extendedProps.judul + "</div>" +
             "<div><p>Tanggal Mulai dan Tanggal Selesai</p>" + event.extendedProps.tanggal_mulai + " - " + event.extendedProps.tanggal_selesai + "</div>" +
             "</div>";
+
+          // Tambahkan tombol Ubah dengan URL yang berisi ID acara
+          detail += "<a href='<?php echo base_url('jadwalpeserta/ubah/'); ?>/" + eventId + "' class='btn btn-warning mb-3'><i class='fas fa-edit'></i> Edit</a> <br>";
+          detail += "<a href='<?php echo base_url('jadwalpeserta/delete/'); ?>/" + eventId + "' class='btn btn-deleteJadwal btn-danger'><i class='fas fa-trash'></i> Hapus</a>";
           Swal.fire({
             title: 'Detail Kegiatan',
             html: detail,
             icon: 'info',
+            showCloseButton: true,
+            showCancelButton: false,
             confirmButtonColor: '#3085d6',
             confirmButtonText: 'Ok',
+            customClass: {
+              closeButton: 'my-swal-close-button',
+              confirmButton: 'my-swal-confirm-button'
+            }
           });
         },
         eventDrop: function(info) {

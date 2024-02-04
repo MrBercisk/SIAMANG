@@ -67,61 +67,61 @@
 
                             <div class="form-group">
                                 <label for="ketepatan_waktu">Ketepatan Waktu:</label>
-                                <input type="number" name="ketepatan_waktu" class="form-control" id="ketepatan_waktu">
+                                <input type="number" name="ketepatan_waktu" class="form-control" id="ketepatan_waktu" min="0" max="100" oninput="validity.valid||(value='');">
                                 <small id="ketepatan_waktu_error" class="text-danger"></small>
                             </div>
 
                             <div class="form-group">
                                 <label for="tanggung_jawab">Tanggung Jawab:</label>
-                                <input type="number" name="tanggung_jawab" class="form-control" id="tanggung_jawab">
+                                <input type="number" name="tanggung_jawab" class="form-control" id="tanggung_jawab" min="0" max="100" oninput="validity.valid||(value='');">
                                 <small id="tanggung_jawab_error" class="text-danger"> </small>
                             </div>
 
                             <div class="form-group">
                                 <label for="kehadiran">Kehadiran:</label>
-                                <input type="number" name="kehadiran" class="form-control" id="kehadiran">
+                                <input type="number" name="kehadiran" class="form-control" id="kehadiran" min="0" max="100" oninput="validity.valid||(value='');">
                                 <small id="kehadiran_error" class="text-danger"> </small>
                             </div>
 
                             <div class="form-group">
                                 <label for="kemampuan_kerja">Kemampuan Kerja:</label>
-                                <input type="number" name="kemampuan_kerja" class="form-control" id="kemampuan_kerja">
+                                <input type="number" name="kemampuan_kerja" class="form-control" id="kemampuan_kerja" min="0" max="100" oninput="validity.valid||(value='');">
                                 <small id="kemampuan_kerja_error" class="text-danger"> </small>
                             </div>
 
                             <div class="form-group">
                                 <label for="kualitas_kerja">Kualitas Kerja:</label>
-                                <input type="number" name="kualitas_kerja" class="form-control" id="kualitas_kerja">
+                                <input type="number" name="kualitas_kerja" class="form-control" id="kualitas_kerja" min="0" max="100" oninput="validity.valid||(value='');">
                                 <small id="kualitas_kerja_error" class="text-danger"> </small>
                             </div>
 
                             <div class="form-group">
                                 <label for="kerjasama">Kerjasama:</label>
-                                <input type="number" name="kerjasama" class="form-control" id="kerjasama">
+                                <input type="number" name="kerjasama" class="form-control" id="kerjasama" min="0" max="100" oninput="validity.valid||(value='');">
                                 <small id="kerjasama_error" class="text-danger"> </small>
                             </div>
 
                             <div class="form-group">
                                 <label for="inisiatif">Inisiatif:</label>
-                                <input type="number" name="inisiatif" class="form-control" id="inisiatif">
+                                <input type="number" name="inisiatif" class="form-control" id="inisiatif" min="0" max="100" oninput="validity.valid||(value='');">
                                 <small id="inisiatif_error" class="text-danger"> </small>
                             </div>
 
                             <div class="form-group">
                                 <label for="rasa_percaya">Rasa Percaya:</label>
-                                <input type="number" name="rasa_percaya" class="form-control" id="rasa_percaya">
+                                <input type="number" name="rasa_percaya" class="form-control" id="rasa_percaya" min="0" max="100" oninput="validity.valid||(value='');">
                                 <small id="rasa_percaya_error" class="text-danger"> </small>
                             </div>
 
                             <div class="form-group">
                                 <label for="penampilan">Penampilan:</label>
-                                <input type="number" name="penampilan" class="form-control" id="penampilan">
+                                <input type="number" name="penampilan" class="form-control" id="penampilan" min="0" max="100" oninput="validity.valid||(value='');">
                                 <small id="penampilan_error" class="text-danger"> </small>
                             </div>
 
                             <div class="form-group">
                                 <label for="patuh_aturan_pkl">Patuh Aturan PKL:</label>
-                                <input type="number" name="patuh_aturan_pkl" class="form-control" id="patuh_aturan_pkl">
+                                <input type="number" name="patuh_aturan_pkl" class="form-control" id="patuh_aturan_pkl" min="0" max="100" oninput="validity.valid||(value='');">
                                 <small id="patuh_aturan_pkl_error" class="text-danger"> </small>
                             </div>
 
@@ -294,6 +294,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/signature_pad/1.5.3/signature_pad.min.js"></script>
 <script>
     $(document).ready(function() {
+
         function calculateRataRata() {
             const ketepatan_waktu = parseInt(document.getElementById("ketepatan_waktu").value);
             const tanggung_jawab = parseInt(document.getElementById("tanggung_jawab").value);
@@ -326,9 +327,9 @@
         // Clear signature pada signature pad
         document.getElementById('clear').addEventListener('click', function() {
             signaturePad.clear();
-             // Kosongkan tanda tangan yang ditampilkan
-        document.getElementById('tanda_tangan_preview').style.display = 'none';
-        document.getElementById('tanda_tangan_preview').src = '';
+            // Kosongkan tanda tangan yang ditampilkan
+            document.getElementById('tanda_tangan_preview').style.display = 'none';
+            document.getElementById('tanda_tangan_preview').src = '';
         });
 
         // Simpan tanda tangan ke input hidden saat tombol Simpan ditekan
@@ -337,8 +338,8 @@
             var signatureData = signaturePad.toDataURL();
             document.getElementById('tanda_tangan').value = signatureData;
             // Tampilkan tanda tangan pada elemen <img>
-        document.getElementById('tanda_tangan_preview').src = signatureData;
-        document.getElementById('tanda_tangan_preview').style.display = 'block';
+            document.getElementById('tanda_tangan_preview').src = signatureData;
+            document.getElementById('tanda_tangan_preview').style.display = 'block';
             // Submit form atau lakukan tindakan lainnya
             document.getElementById('formTambahNilai').submit();
         });

@@ -63,7 +63,7 @@
 
                 <!-- Tambahkan class "animate__animated" dan class animasi lainnya ke elemen yang ingin dianimasikan -->
                 <div class="section-title animate__animated animate__fadeInUp">
-                    <h3><span>Halaman Lupa Password</span></h3>
+                    <h2><span>Lupa Password</span></h2>
                     <p>Aplikasi Pendaftaran Magang Mahasiswa - DISKOMINFOSAN</p>
                 </div>
 

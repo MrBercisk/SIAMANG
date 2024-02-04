@@ -38,15 +38,13 @@
       </div>
       <div class="row" data-aos="fade-up" data-aos-delay="100">
 
-        <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+        <div class="col-lg-3 col-md-6 d-flex align-items-stretch mb-2" data-aos="fade-up" data-aos-delay="100">
           <div class="member">
             <div class="member-img">
               <img src="/file_peserta/<?= $pendaftaran['foto']; ?>" class="img-fluid " id="previewImg" alt="">
             </div>
-            <h4 class="profile-username text-center"><?= $pendaftaran['nama_peserta']; ?></h4>
+            <h4 class="profile-username text-center mt-2"><?= $pendaftaran['nama_peserta']; ?></h4>
             <h5 class="profile-username text-center"><?= $pendaftaran['keahlian']; ?></h5>
-
-
           </div>
         </div>
 
@@ -233,7 +231,7 @@
                 <div class="card-body">
                   <h5 class="card-title"><?= $nama_kategori . " - " . $nama_bidang; ?></h5>
                   <p class="card-text">Anda telah diterima magang di <?= $nama_bidang; ?>.</p>
-                  <a href="<?= base_url('updateProfile'); ?>" class="btn btn-primary btn-lg btn-block mb-3 animate__animated animate__fadeIn">
+                  <a href="<?= base_url('mahasiswa'); ?>" class="btn btn-primary btn-lg btn-block mb-3 animate__animated animate__fadeIn">
                     <i class='bx bxs-link-external'></i> Masuk Halaman Magang
                   </a>
                   <p class="text-muted mb-0"><i class='bx bxs-info-circle'></i> Link Magang bersifat pribadi dan tidak boleh dishare kepada siapapun.</p>

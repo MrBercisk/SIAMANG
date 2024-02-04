@@ -148,7 +148,67 @@ class JadwalPeserta extends BaseController
         }
     }
 
+    public function ubah($id)
+    {
+        $data['title']   = "SI AMANG | Ubah Jadwal Peserta";
+        $data['page']    = "ubahjadwal";
+        $data['nama']    = $this->session->get('nama');
+        $data['email']   = $this->session->get('email');
+        // Ambil data pendaftaran yang terbaru dan belum diterima
+        $data['tbl_pendaftaran'] = $this->M_pendaftaran->where('status_verifikasi', 'Diterima')
+            ->orderBy('created_at', 'DESC')
+            ->findAll();
+        $data['jumlah_pendaftaran'] = count($data['tbl_pendaftaran']);
+        $data['events'] = $this->M_jadwal->getEvents();
+        
+        $data['event'] = $this->M_jadwal->select('tbl_jadwal.*, tbl_pendaftaran.nama_peserta, tbl_pendaftaran.id')
+        ->join('tbl_pendaftaran', 'tbl_jadwal.pendaftaran_id = tbl_pendaftaran.id', 'left')
+        ->find($id);
 
+        /* dd($data['event']); */
+
+
+        if ($this->request->getMethod() == 'post' && $this->validate([
+            'nama_peserta' => 'required',
+            'tanggal_mulai' => 'required',
+            'tanggal_selesai' => 'required',
+            'tanggal_bimbingan' => 'required',
+            'jam_bimbingan' => 'required'
+        ])) {
+            $data = [
+                'nama_peserta' => $this->request->getPost('nama_peserta'),
+                'tanggal_mulai' => $this->request->getPost('tanggal_mulai'),
+                'tanggal_selesai' => $this->request->getPost('tanggal_selesai'),
+                'tanggal_bimbingan' => $this->request->getPost('tanggal_bimbingan'),
+                'jam_bimbingan' => $this->request->getPost('jam_bimbingan')
+            ];
+
+            $this->M_jadwal->update($id, $data);
+
+
+            return redirect()->to(base_url('jadwalpeserta'));
+        }
+
+        return view('v_jadwal/edit', $data);
+    }
+    public function update($id)
+    {
+        if ($this->request->getMethod() == 'post' && $this->validate([
+            'tanggal_bimbingan' => 'required',
+            'jam_bimbingan' => 'required'
+        ])) {
+            $data = [
+                'tanggal_bimbingan' => $this->request->getPost('tanggal_bimbingan'),
+                'jam_bimbingan' => $this->request->getPost('jam_bimbingan')
+            ];
+
+            $this->M_jadwal->update($id, $data);
+            
+            session()->setFlashdata('success', 'Jadwal berhasil diubah!');
+            // redirect ke halaman sebelumnya
+            return redirect()->to(base_url('jadwalpeserta'));
+        }
+    }
     // Delete Data 
     public function delete($id)
     {

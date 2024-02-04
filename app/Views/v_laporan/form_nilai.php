@@ -148,12 +148,12 @@
 		</td>
 	</tr>
 	<tr>
-        <td rowspan="3">Tanda Tangan</td>
-        <td rowspan="3" colspan="2">
-            <!-- Tampilkan tanda tangan -->
-            <img src="<?= $nilai['tanda_tangan'] ?? '' ?>" style="max-width: 200px;">
-        </td>
-    </tr>
+		<td rowspan="3">Tanda Tangan</td>
+		<td rowspan="3" colspan="2">
+			<!-- Tampilkan tanda tangan -->
+			<img src="<?= $nilai['tanda_tangan'] ?? '' ?>" style="max-width: 200px;">
+		</td>
+	</tr>
 
 	<tr>
 
@@ -315,16 +315,8 @@
 			<tr>
 				<td rowspan="3">Tanda Tangan</td>
 				<td rowspan="3" colspan="2">
-					<?php
-					if (isset($nilai['tanda_tangan'])) {
-						$base64 = $nilai['tanda_tangan'];
-						$imageData = str_replace('data:image/png;base64,', '', $base64);
-						$imageData = str_replace(' ', '+', $imageData);
-						$image = base64_decode($imageData);
-						file_put_contents('signature.png', $image);
-						echo '<img src="signature.png" />';
-					}
-					?>
+					<!-- Tampilkan tanda tangan -->
+					<img src="<?= $nilai['tanda_tangan'] ?? '' ?>" style="max-width: 200px;">
 				</td>
 
 			</tr>
@@ -485,16 +477,8 @@
 			<tr>
 				<td rowspan="3">Tanda Tangan</td>
 				<td rowspan="3" colspan="2">
-					<?php
-					if (isset($nilai['tanda_tangan'])) {
-						$base64 = $nilai['tanda_tangan'];
-						$imageData = str_replace('data:image/png;base64,', '', $base64);
-						$imageData = str_replace(' ', '+', $imageData);
-						$image = base64_decode($imageData);
-						file_put_contents('signature.png', $image);
-						echo '<img src="signature.png" />';
-					}
-					?>
+					<!-- Tampilkan tanda tangan -->
+					<img src="<?= $nilai['tanda_tangan'] ?? '' ?>" style="max-width: 200px;">
 				</td>
 
 			</tr>

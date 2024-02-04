@@ -57,14 +57,16 @@
             </div>
             <div class="form-group">
               <label for="nama_kampus">Nama Kampus<span style="color:red"> *</span></label>
-              <select class="form-control" name="nama_kampus" required>
+              <select class="form-control" name="nama_kampus" id="nama_kampus" required>
+                <option value="">--Nama Kampus--</option>
                 <?php foreach ($nama_kampus as $a) : ?>
                   <option value="<?= $a['nama_kampus']; ?>" <?= $a['nama_kampus'] == $cekTahapSatu['nama_kampus'] ? 'selected' : '' ?>>
                     <?= $a['nama_kampus']; ?>
                   </option>
                 <?php endforeach; ?>
-
+                <option value="lainnya">Lainnya</option>
               </select>
+              <input type="text" class="form-control mt-2 d-none" id="nama_kampus_lainnya" name="nama_kampus" placeholder="Tambahkan dengan format sebagai berikut (contoh : UBSI, UNY, dll)">
               <small id="nama_kampus_error" class="form-text text-danger mb-3"></small>
             </div>
 
@@ -163,6 +165,13 @@
 <?= $this->section('script') ?>
 <script>
   $(document).ready(function() {
+    $("#nama_kampus").change(function() {
+      if ($(this).val() === "lainnya") {
+        $("#nama_kampus_lainnya").removeClass("d-none").focus();
+      } else {
+        $("#nama_kampus_lainnya").addClass("d-none");
+      }
+    });
     $("#status_permohonan").change(function() {
       if ($(this).val() == "Kelompok") {
         $("#form-nama-anggota-1").removeClass("d-none");
@@ -209,13 +218,16 @@
             if (data.tahap_satu_error['tools'] != '') $('#tools_error').html(data.tahap_satu_error['tools']);
             else $('#tools_error').html('');
 
+            if (data.tahap_satu_error['prodi'] != '') $('#prodi_error').html(data.tahap_satu_error['prodi']);
+            else $('#prodi_error').html('');
+
             if (data.tahap_satu_error['judul'] != '') $('#judul_error').html(data.tahap_satu_error['judul']);
             else $('#judul_error').html('');
 
-            if (data.tahap_dua_error['jenis_permohonan'] != '') $('#jenis_permohonan_error').html(data.tahap_dua_error['jenis_permohonan']);
+            if (data.tahap_satu_error['jenis_permohonan'] != '') $('#jenis_permohonan_error').html(data.tahap_satu_error['jenis_permohonan']);
             else $('#jenis_permohonan_error').html('');
 
-            if (data.tahap_dua_error['status_permohonan'] != '') $('#status_permohonan_error').html(data.tahap_dua_error['status_permohonan']);
+            if (data.tahap_satu_error['status_permohonan'] != '') $('#status_permohonan_error').html(data.tahap_satu_error['status_permohonan']);
             else $('#status_permohonan_error').html('');
 
 

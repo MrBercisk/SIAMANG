@@ -10,7 +10,7 @@ class ProgresMagangModel extends Model
 	protected $primaryKey = 'id';
 	protected $allowedFields = ['user_id', 'tbl_pendaftaran.judul', 'tgl_bimbingan', 'pencapaian', 'catatan', 'file_presentasi', 'created_at'];
 	protected $column_order = [null, 'user_id', 'judul', 'tgl_bimbingan', 'pencapaian', 'catatan', 'file_presentasi', 'created_at', null];
-	protected $column_search = ['tbl_pendaftaran.judul','tgl_bimbingan', 'pencapaian', 'catatan'];
+	protected $column_search = ['tbl_pendaftaran.judul', 'tgl_bimbingan', 'pencapaian', 'catatan'];
 	protected $order = ['tbl_progresmagang.id' => 'desc'];
 	protected $useTimestamps = true;
 	protected $createdField  = 'created_at';
@@ -94,5 +94,9 @@ class ProgresMagangModel extends Model
 	public function updateProgress($data)
 	{
 		return $this->update($data);
+	}
+	public function getProgressByUserId($user_id)
+	{
+		return $this->where('user_id', $user_id)->first();
 	}
 }

@@ -170,5 +170,23 @@
     </section>
     <!-- /.content -->
 </div>
-
+<?php if (session()->has('success')) : ?>
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Berhasil',
+            text: '<?= session('success') ?>',
+        })
+    </script>
+<?php endif ?>
+<?php if (session()->has('error')) : ?>
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Gagal',
+            text: '<?= session('error') ?>',
+        })
+    </script>
+<?php endif ?>
+</div>
 <?= $this->endSection() ?>

@@ -93,7 +93,7 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1"><i class="icofont-email"></i></span>
                   </div>
-                  <input type="email" class="form-control" name="email" placeholder="Email" />
+                  <input type="text" class="form-control" name="email" placeholder="Email" />
                 </div>
                 <small id="email_error" class="form-text text-danger mb-3"></small>
               </div>
@@ -107,7 +107,7 @@
                 </div>
                 <small id="password_error" class="form-text text-danger mb-3"></small>
               </div>
-              <div class="form-group">
+                 <div class="form-group">
                 <div class="input-group">
                   <div class="input-group-prepend">
                     <div class="g-recaptcha mb-3" data-sitekey="6Lcq86klAAAAAG5jA7l96kqbYI09N4y-U8k5RjHG"></div>

@@ -149,7 +149,7 @@ class Pendaftaran extends BaseController
 
 		// Jika status pendaftaran selesai dan status verifikasi diterima
 		if ($cekStatus['status_pendaftaran'] == "Selesai" && $cekStatus['status_verifikasi'] == "Diterima") {
-			return redirect()->to('/updateProfile'); // Ganti dengan link yang sesuai untuk updateProfile
+			return redirect()->to('/mahasiswa'); // Ganti dengan link yang sesuai untuk mahasiswa
 		}
 
 		// Jika status pendaftaran selesai
@@ -265,6 +265,7 @@ class Pendaftaran extends BaseController
 		//Cek bidang dan Kategori Peserta pada pendaftaran tahap dua berdasarkan user_id
 		$user_id = $this->session->get('id');
 		$cekTahapDua = $this->M_pendaftaran->where('user_id', $user_id)->first();
+		
 		$bidang_id = $cekTahapDua['bidang_id'];
 		$kategori_id = $cekTahapDua['kategori_id'];
 

@@ -169,7 +169,7 @@ class DiskusiForum extends BaseController
             ];
             $this->ChatModel->insert($data);
 
-            return redirect()->to('index');
+            return redirect()->to('index')->with('success', 'Pesan Berhasil Dikirim');
         }
     }
 }

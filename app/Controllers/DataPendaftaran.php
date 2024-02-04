@@ -34,7 +34,6 @@ class DataPendaftaran extends BaseController
 		$this->M_user = new UserModel($this->request);
 		$this->form_validation =  \Config\Services::validation();
 		$this->session = \Config\Services::session();
-
 	}
 
 	// Tombol Aksi Pada Tabel Data Pendaftaran
@@ -112,7 +111,6 @@ class DataPendaftaran extends BaseController
 			$email->setMessage($emailMessage);
 			$email->setMailType('html');
 			$email->send();
-			
 		}
 		$data['events'] = $this->M_jadwal->getEvents();
 		return view('v_dataPendaftaran/index', $data);
@@ -232,7 +230,7 @@ class DataPendaftaran extends BaseController
 	<h1>Selamat Pendaftaran Anda Kami Terima!</h1>
 	<p>Terima kasih telah mendaftar untuk program magang di SI AMANG. Anda akan segera mendapatkan informasi lebih lanjut mengenai jadwal dan tugas magang.</p>
 	<p>Untuk saat ini, silakan login terlebih dahulu dan cek jadwal magang Anda dengan cara klik tautan berikut:</p>
-	<a href="' . base_url('updateProfile') . '" class="btn btn-primary">Masuk Halaman Magang</a>
+	<a href="' . base_url('mahasiswa') . '" class="btn btn-primary">Masuk Halaman Magang</a>
 	<p>Jangan ragu untuk menghubungi kami jika Anda memiliki pertanyaan atau kekhawatiran. Kami berharap Anda dapat memperoleh pengalaman magang yang bermanfaat di DISKOMINFOSAN Kota Yogyakarta.</p>
 	
 	</body>
@@ -395,7 +393,7 @@ class DataPendaftaran extends BaseController
 		$builder = $db->table('tbl_pendaftaran');
 
 		$builder->select('*')->join('tbl_kategori', 'tbl_kategori.id = tbl_pendaftaran.kategori_id', 'left');
-		
+
 		if (!empty($nama_peserta)) {
 			$builder->like('nama_peserta', $nama_peserta, 'both');
 		}

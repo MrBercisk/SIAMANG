@@ -7,10 +7,10 @@ use CodeIgniter\Model;
 class ProfileModel extends Model
 {
     protected $table = 'tbl_pendaftaran';
-    protected $allowedFields = ['foto','keahlian'];
+    protected $allowedFields = ['foto', 'keahlian'];
     protected $useTimestamps = true;
 
-    public function updateProfile($userId, $foto)
+    public function mahasiswa($userId, $foto)
     {
         $this->set('foto', $foto);
         $this->where('user_id', $userId);

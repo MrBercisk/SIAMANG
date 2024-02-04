@@ -26,11 +26,18 @@
                             <h3 class="card-title" style=" color:#17A2B8;"><i class="fas fa-plus"></i> Tambah Kampus Yang Tersedia</h3>
                         </div>
                         <div class="card-body">
-                            <form action="<?php echo base_url("Kampus/tambah") ?>" method="post">
+                            <?php if (isset($errors)) : ?>
+                                <div style="color: red;">
+                                    <?php foreach ($errors as $error) : ?>
+                                        <?= esc($error) ?><br>
+                                    <?php endforeach ?>
+                                </div>
+                            <?php endif; ?>
+                            <form action="<?php echo base_url("kampus/tambah") ?>" method="post" id="formTambah">
                                 <div class="mb-3">
                                     <label for="nama_kampus" class="form-label">Nama Kampus</label>
-                                    <input type="text" class="form-control" id="nama_kampus" name="nama_kampus" required >
-                                    <small id="nama_kampus_error" class="text-danger"> </small>
+                                    <input type="text" class="form-control" id="nama_kampus" name="nama_kampus" value="<?= old('nama_kampus') ?>">
+                                    <small id="errorMessages" class="text-danger"> </small>
                                 </div>
                                 <div class="col-12 d-flex justify-content-end">
                                     <button type="submit" class="btn btn-primary">Simpan</button>
@@ -126,6 +133,39 @@
                     "next": "Selanjutnya"
                 }
             }
+        });
+        $('#formTambah').submit(function(e) {
+            e.preventDefault();
+
+            $.ajax({
+                type: 'POST',
+                url: '/kampus/tambah',
+                data: $('#formTambah').serialize(),
+                dataType: 'json',
+                success: function(response) {
+                    if (response.success) {
+                        $('#errorMessages').text('');
+                        $('#nama_kampus').val('');
+                          Swal.fire({
+                                icon: 'success',
+                                title: 'Data kampus berhasil ditambahkan.',
+                                showConfirmButton: false,
+                                timer: 2000 // 2 seconds
+                            });
+                        location.reload();
+                    } else {
+                        let errorsHtml = '';
+                        for (const key in response.errors) {
+                            errorsHtml += response.errors[key] + '<br>';
+                        }
+                        $('#errorMessages').html(errorsHtml);
+                    }
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    console.log(xhr.responseText);
+                    alert('An error occurred. Please try again later.');
+                }
+            });
         });
         //-------------------------------------------------------------------
         //Hapus data

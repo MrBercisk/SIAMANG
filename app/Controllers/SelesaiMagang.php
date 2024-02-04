@@ -102,7 +102,7 @@ class SelesaiMagang extends BaseController
         $query = $builder->get();
         $data['chat'] = $query->getResult();
 
-      
+
         $currentUser = $this->session->get('id');
         // Periksa apakah ada pesan baru yang belum dibaca
         $chatBaru = false;
@@ -147,16 +147,13 @@ class SelesaiMagang extends BaseController
             $pesan = "Anda Sudah upload laporan, Silahkan akses halaman saat anda telah selesai magang";
             $this->session->setFlashdata('pesan_error', $pesan);
             return redirect()->back();
-        }
-        if ($tanggal_sekarang > $data['tanggal_selesai'] && $data['keterangan_laporan'] == 'Anda Sudah Upload Laporan') {
+        } elseif ($tanggal_sekarang > $data['tanggal_selesai'] && $data['keterangan_laporan'] == 'Anda Sudah Upload Laporan') {
             $pesan = "Terima kasih anda telah menyelesaikan magang anda, Silahkan download file-file yang sudah tersedia";
             $this->session->setFlashdata('pesan_sukses', $pesan);
-        } else {
-            $pesan = "Maaf, Halaman Tidak bisa diakses karena anda belum mengisi laporan magang melebihi tanggal selesai magang jadi sistem menganggap bahwa anda tidak menyelesaikan magang anda";
-            $this->session->setFlashdata('pesan_error', $pesan);
-            return redirect()->back();
+        }elseif ($tanggal_sekarang == $data['tanggal_selesai'] && $data['keterangan_laporan'] == 'Anda Sudah Upload Laporan') {
+            $pesan = "Terima kasih anda telah menyelesaikan magang anda, Silahkan download file-file yang sudah tersedia";
+            $this->session->setFlashdata('pesan_sukses', $pesan);
         }
-
         // Ambil data pendaftaran yang terbaru dan belum diterima
         $data['tbl_pendaftaran'] = $this->M_pendaftaran->where('status_verifikasi', 'Belum Verifikasi')
             ->orderBy('created_at', 'DESC')

@@ -18,6 +18,24 @@ function ubah_tgl1($tanggal) {
    $satukan = implode('-',$larik);
    return $satukan;
 }
+function ubah_hari_ke_indonesia($hari) {
+   $daftar_hari = [
+       'Sunday'    => 'Minggu',
+       'Monday'    => 'Senin',
+       'Tuesday'   => 'Selasa',
+       'Wednesday' => 'Rabu',
+       'Thursday'  => 'Kamis',
+       'Friday'    => 'Jumat',
+       'Saturday'  => 'Sabtu'
+   ];
+
+   if (isset($daftar_hari[$hari])) {
+       return $daftar_hari[$hari];
+   }
+
+   return $hari;
+}
+
 
 // Fungsi untuk mengubah susunan format tanggal dari database ke form
 function ubah_tgl2($tanggal) { 

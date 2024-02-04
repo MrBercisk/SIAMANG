@@ -13,7 +13,7 @@ use Config\Services;
 use App\Models\ProfileModel;
 
 
-class UpdateProfile extends BaseController
+class Mahasiswa extends BaseController
 {
 
     protected $encrypter;
@@ -56,17 +56,17 @@ class UpdateProfile extends BaseController
             return redirect()->to('/login');
         }
         // menampilkan data title, link, dan view
-        $data['title']   = "SI AMANG | Update Profile";
+        $data['title']   = "SI AMANG | Mahasiswa";
         $data['judul']   = "Silahkan Perbarui Foto Profile Anda Kemudian, Demi kemanan dimohon untuk selalu ganti password secara berkala";
         $data['page']   = "magang";
         $data['events'] = $this->M_jadwal->getEvents();
         $data['nama']   = $this->session->get('nama');
         $data['email']   = $this->session->get('email');
-    
+
         //Cek pendaftaran berdasarkan user_id
         $user_id = $this->session->get('id');
         $pendaftaran = $this->M_pendaftaran->where('user_id', $user_id)->first();
-    
+
         // megambil data dari tbl_pendaftaran, tbl_jadwal, dan tbl_user
         $builder = $this->db->table('tbl_pendaftaran');
         $builder->select('tbl_pendaftaran.nama_peserta, tbl_pendaftaran.nim, tbl_pendaftaran.keahlian, tbl_pendaftaran.foto, tbl_user.nama, tbl_jadwal.tanggal_mulai, tbl_jadwal.tanggal_selesai');
@@ -75,13 +75,13 @@ class UpdateProfile extends BaseController
         $builder->where('tbl_pendaftaran.user_id', $user_id);
         $query = $builder->get();
         $data['pendaftaran'] = $query->getRow();
-    
+
         // mengambil data id pada tbl_user
         $builder = $this->db->table('tbl_user');
         $builder->where('tbl_user.id', $user_id);
         $query = $builder->get();
         $data['user'] = $query->getRow();
-    
+
         // ambil data chat yang terkait dengan user yang sedang login
         $builder = $this->db->table('chat');
         $builder->select('chat.*, tbl_user.role_id, tbl_user.nama as pengirim_nama');
@@ -90,7 +90,7 @@ class UpdateProfile extends BaseController
         $builder->where('chat.kategori_id', $data['user']->kategori_id);
         $query = $builder->get();
         $data['chat'] = $query->getResult();
-       
+
         $currentUser = $this->session->get('id');
         // Periksa apakah ada pesan baru yang belum dibaca
         $chatBaru = false;
@@ -115,7 +115,7 @@ class UpdateProfile extends BaseController
             return !$chat->dibaca && $chat->pengirim !== $currentUser;
         });
         $data['chat_baru'] = count($filteredChat);
-    
+
         // pengambilan data dari tbl_pendaftaran & tbl_user
         $data['nama_peserta'] = $data['pendaftaran']->nama_peserta;
         $data['keahlian'] = $data['pendaftaran']->keahlian;
@@ -123,20 +123,20 @@ class UpdateProfile extends BaseController
         $data['foto'] = $data['pendaftaran']->foto;
         $data['tanggal_mulai'] = $data['pendaftaran']->tanggal_mulai;
         $data['tanggal_selesai'] = $data['pendaftaran']->tanggal_selesai;
-        
+
         $laporan = new LaporanModel();
         $where = ['user_id' => $user_id];
         $data['laporan'] = $laporan->where($where)->first();
-        
+
         if ($data['laporan']) {
             $data['keterangan_laporan'] = "Anda Sudah Upload Laporan";
         } else {
             $data['keterangan_laporan'] = "Anda Belum Upload Laporan";
         }
-        
+
         return view('v_magang/index', $data);
     }
-    
+
 
 
     // update foto
@@ -173,7 +173,7 @@ class UpdateProfile extends BaseController
             $file->move('file_peserta', $fileName);
 
             $model = new ProfileModel();
-            $model->updateProfile($userId, $fileName);
+            $model->mahasiswa($userId, $fileName);
 
             return redirect()->back()->with('success', 'Foto berhasil diupdate');
         } else {
@@ -236,7 +236,7 @@ class UpdateProfile extends BaseController
         ];
         $this->M_user->update($user_id, $data);
 
-        return redirect()->to(base_url('updateprofile'))->with('success', 'Password berhasil diupdate!');
+        return redirect()->to(base_url('mahasiswa'))->with('success', 'Password berhasil diupdate!');
     }
 
     // Cetak bukti pendaftaran

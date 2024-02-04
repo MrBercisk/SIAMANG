@@ -94,32 +94,32 @@ class Mentor extends BaseController
 		$query = $builder->get();
 		$data['chat'] = $query->getResult();
 
-		
-        $currentUser = $this->session->get('id');
-        // Periksa apakah ada pesan baru yang belum dibaca
-        $chatBaru = false;
-        foreach ($data['chat'] as $chat) {
-            if (!$chat->dibaca && $chat->pengirim !== $currentUser) {
-                $chatBaru = true;
-                break;
-            }
-        }
 
-        // Jika chat dibuka atau halaman diskusiforum diakses oleh penerima pesan,
-        // set nilai 'dibaca' menjadi true untuk pesan yang dikirim oleh pengirim.
-        if ($chatBaru) {
-            $this->db->table('chat')
-                ->where('kategori_id', $data['user']->kategori_id)
-                ->where('pengirim', $chat->pengirim); // Hanya untuk pesan yang dikirim oleh pengirim
-        }
+		$currentUser = $this->session->get('id');
+		// Periksa apakah ada pesan baru yang belum dibaca
+		$chatBaru = false;
+		foreach ($data['chat'] as $chat) {
+			if (!$chat->dibaca && $chat->pengirim !== $currentUser) {
+				$chatBaru = true;
+				break;
+			}
+		}
 
-        // Filter chat yang belum dibaca oleh pengirim
-        $filteredChat = array_filter($data['chat'], function ($chat) use ($currentUser) {
-            // Memeriksa apakah chat belum dibaca dan bukan dikirim oleh pengirim
-            return !$chat->dibaca && $chat->pengirim !== $currentUser;
-        });
-        $data['chat_baru'] = count($filteredChat);
-		
+		// Jika chat dibuka atau halaman diskusiforum diakses oleh penerima pesan,
+		// set nilai 'dibaca' menjadi true untuk pesan yang dikirim oleh pengirim.
+		if ($chatBaru) {
+			$this->db->table('chat')
+				->where('kategori_id', $data['user']->kategori_id)
+				->where('pengirim', $chat->pengirim); // Hanya untuk pesan yang dikirim oleh pengirim
+		}
+
+		// Filter chat yang belum dibaca oleh pengirim
+		$filteredChat = array_filter($data['chat'], function ($chat) use ($currentUser) {
+			// Memeriksa apakah chat belum dibaca dan bukan dikirim oleh pengirim
+			return !$chat->dibaca && $chat->pengirim !== $currentUser;
+		});
+		$data['chat_baru'] = count($filteredChat);
+
 		// Ambil data pendaftaran yang terbaru dan belum diterima
 		$data['tbl_pendaftaran'] = $this->M_pendaftaran->where('status_verifikasi', 'Belum Verifikasi')
 			->orderBy('created_at', 'DESC')
@@ -128,24 +128,7 @@ class Mentor extends BaseController
 		return view('v_mentor/index', $data);
 	}
 
-	public function updateProfile()
-	{
-		$data['nama']   = $this->session->get('nama');
-		$data['email']   = $this->session->get('email');
-		// menampilkan data title, link dan view
-		$data['title']   = "SI AMANG | Update Profile";
-		$data['judul']   = "Silahkan Perbarui Profile Anda Kemudian, Demi keamanan dimohon untuk selalu ganti password secara berkala";
-		$data['page']   = "magang";
-		$data['events'] = $this->M_jadwal->getEvents();
-
-		// Ambil data pendaftaran yang terbaru dan belum diterima
-		$data['tbl_pendaftaran'] = $this->M_pendaftaran->where('status_verifikasi', 'Belum Verifikasi')
-			->orderBy('created_at', 'DESC')
-			->findAll();
-		$data['jumlah_pendaftaran'] = count($data['tbl_pendaftaran']);
-		return view('v_mentor/profil', $data);
-	}
-
+	
 	// update password
 	// method untuk menampilkan form update password
 	public function updatePasswordForm()
@@ -199,7 +182,7 @@ class Mentor extends BaseController
 		];
 		$this->M_user->update($user_id, $data);
 
-		return redirect()->to(base_url('mentor/updateprofile'))->with('success', 'Password berhasil diupdate!');
+		return redirect()->to(base_url('mentor/mahasiswa'))->with('success', 'Password berhasil diupdate!');
 	}
 
 

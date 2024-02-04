@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Data Nilai Magang Mahasiswa</title>
+    <title>Rekap Nilai Magang Mahasiswa</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -42,7 +42,7 @@
     </style>
 </head>
 <body>
-    <h2>Data Nilai Magang Mahasiswa</h2>
+    <h2>Rekap Nilai Magang Mahasiswa</h2>
     <div style="overflow-x: auto;">
         <table>
             <thead>

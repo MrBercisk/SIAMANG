@@ -46,7 +46,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="small-box bg-danger">
+                    <div class="small-box bg-info">
                         <div class="inner">
                             <div class="d-flex align-items-center">
                                 <div class="icon-container">
@@ -104,20 +104,20 @@
 
                             <form class="mb-3 mt-3" action="/laporanmagang/create" method="POST" enctype="multipart/form-data">
                                 <div class="mb-3">
-                                    <label for="judul_laporan" class="form-label">Judul Laporan</label>
-                                    <input type="text" class="form-control" id="judul_laporan" name="judul_laporan" required>
+                                    <label for="judul_laporan" class="form-label">Judul Laporan<span style="color:red"> *</span></label>
+                                    <input type="text" class="form-control" id="judul_laporan" name="judul_laporan" placeholder="Contoh: Perancangan Sistem Informasi Aplikasi Presensi" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="file_laporan" class="form-label">File Laporan (PDF)</label>
+                                    <label for="file_laporan" class="form-label">File Laporan (PDF)<span style="color:red"> *</span></label>
                                     <input type="file" class="form-control" id="file_laporan" name="file_laporan" accept=".pdf" required>
                                     <div class="form-text text-danger">** File harus berformat PDF dan tidak lebih dari 2 MB.</div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="link_drive" class="form-label">Link Google Drive</label>
-                                    <input type="url" class="form-control" id="link_drive" name="link_drive">
+                                    <label for="link_drive" class="form-label">Link Google Drive<span style="color:red"> *</span></label>
+                                    <input type="url" class="form-control" id="link_drive" name="link_drive" placeholder="Masukkan Link Project/Laporan : https://drive.google.com/file/d/14wUrOkCVbx-e_LaFJhGXKy ">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="form_nilai" class="form-label">Form Nilai (PDF)</label>
+                                    <label for="form_nilai" class="form-label">Form Nilai (PDF)<span style="color:red"> *</span></label>
                                     <input type="file" class="form-control" id="form_nilai" name="form_nilai" accept=".pdf" required>
                                     <div class="form-text text-danger">** File harus berformat PDF dan tidak lebih dari 2 MB.</div>
                                 </div>
@@ -150,7 +150,6 @@
                                 })
                             </script>
                         <?php endif ?>
-
 
                     </div>
                 </div>

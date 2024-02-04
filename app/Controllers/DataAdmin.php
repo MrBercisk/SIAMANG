@@ -1,10 +1,12 @@
 <?php namespace App\Controllers;
 
 use App\Models\UserModel;
+use App\Models\BidangModel;
 use Config\Services;
 
 class DataUser extends BaseController
 {
+	protected $M_user;
 	protected $M_bidang;
 	protected $request;
 	protected $form_validation;
@@ -14,6 +16,7 @@ class DataUser extends BaseController
 	{
 		$this->request = Services::request();
 	  	$this->M_user = new UserModel($this->request);
+	  	$this->M_bidang = new BidangModel($this->request);
 		$this->form_validation =  \Config\Services::validation();
 		$this->session = \Config\Services::session();
 	}

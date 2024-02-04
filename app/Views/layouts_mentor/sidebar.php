@@ -66,6 +66,14 @@
         </li>
       
         <li class="nav-item">
+          <a href="<?php echo base_url('mentordatapresensi'); ?>" class="nav-link <?php if ($page == 'mentordatapresensi') echo " active";  ?>">
+            <i class="nav-icon fas fa-user-check"></i>
+            <p>
+              Presensi Mahasiswa
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
           <a href="<?php echo base_url('mentorprogress'); ?>" class="nav-link <?php if ($page == 'dataprogress') echo " active";  ?>">
             <i class="nav-icon fas fa-chart-line"></i>
             <p>

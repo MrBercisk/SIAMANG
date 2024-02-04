@@ -67,7 +67,7 @@
                                     <div class="col-md-9">
                                         <div class="card">
                                             <div class="p-5">
-                                           
+
                                                 <?php if ($tanggal_mulai && $tanggal_selesai) { ?>
 
                                                     <div class="card animate__animated animate__fadeInUp">
@@ -182,6 +182,17 @@
                                                         countdown();
                                                         var x = setInterval(countdown, 1000);
                                                     </script>
+                                                <?php } else { ?>
+                                                    <div class="card animate__animated animate__fadeInUp">
+                                                        <div class="card-header bg-primary text-white">
+                                                            <h4 class="mb-0 text-center align-items-center"> Periode Magang Anda</h4>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div class="text-container text-center">
+                                                                <h4 class="mb-0 text-center align-items-center">Silahkan tunggu jadwal magang Anda</h4>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 <?php } ?>
 
                                                 <style>
@@ -209,7 +220,7 @@
                                                 <p class="text-muted text-center"><?= $keahlian ?></p>
 
                                                 <!-- views/profile/update_photo.php -->
-                                                <form class="text-center mb-5" method="POST" action="<?= base_url('updateprofile/update') ?>" enctype="multipart/form-data">
+                                                <form class="text-center mb-5" method="POST" action="<?= base_url('mahasiswa/update') ?>" enctype="multipart/form-data">
                                                     <div class="form-group">
                                                         <input type="file" class="" id="foto" name="foto">
                                                     </div>
@@ -277,7 +288,7 @@
                                                         <div class="card-body">
                                                             <h5 class="card-title">Surat Diterima Magang</h5>
                                                             <p class="card-text">Klik tombol di bawah untuk mengunduh</p>
-                                                            <a href="<?php echo base_url('updateProfile/buktiPendaftaran'); ?>" class="btn btn-primary"><i class="fa fa-download"></i> Unduh Surat Diterima</a>
+                                                            <a href="<?php echo base_url('mahasiswa/buktiPendaftaran'); ?>" class="btn btn-primary"><i class="fa fa-download"></i> Unduh Surat Diterima</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -309,7 +320,7 @@
                                 <div class="col-md-9">
                                     <div class="card">
                                         <div class="p-5">
-                                            <form method="POST" action="<?= base_url('updateprofile/updatePassword') ?>">
+                                            <form method="POST" action="<?= base_url('mahasiswa/updatePassword') ?>">
                                                 <div class="form-group">
                                                     <label for="old_password">Password Lama</label>
                                                     <div class="input-group">

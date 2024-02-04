@@ -2,14 +2,8 @@
 
 <?= $this->section('content') ?>
 
-
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-  <?php if (session()->getFlashdata('success')) { ?>
-    <div class="alert alert-success">
-      <?= session()->getFlashdata('success') ?>
-    </div>
-  <?php } ?>
   <section class="content-header bg-white" style="height: 50px; max-height: 100px;">
     <div class="container-fluid">
       <div class="row mb-2">
@@ -40,6 +34,11 @@
               </a>
               <div class="calendar-container">
                 <div class="calendar-body">
+                  <?php if (session()->getFlashdata('success')) { ?>
+                    <div class="alert alert-success">
+                      <?= session()->getFlashdata('success') ?>
+                    </div>
+                  <?php } ?>
                   <div id="calendar"></div>
                 </div>
               </div>
@@ -182,8 +181,20 @@
         success: function(data) {
           //Data Error
           if (data.error) {
-            if (data.nama_error['nama_peserta'] != '') $('#nama_peserta_error').html(data.nama_peserta_error['nama_peserta']);
+            if (data.jadwal_error['nama_peserta'] != '') $('#nama_peserta_error').html(data.jadwal_error['nama_peserta']);
             else $('#nama_peserta_error').html('');
+            
+            if (data.jadwal_error['tanggal_mulai'] != '') $('#tanggal_mulai_error').html(data.jadwal_error['tanggal_mulai']);
+            else $('#tanggal_mulai_error').html('');
+            
+            if (data.jadwal_error['tanggal_selesai'] != '') $('#tanggal_selesai_error').html(data.jadwal_error['tanggal_selesai']);
+            else $('#tanggal_selesai_error').html('');
+            
+            if (data.jadwal_error['tanggal_bimbingan'] != '') $('#tanggal_bimbingan_error').html(data.jadwal_error['tanggal_bimbingan']);
+            else $('#tanggal_bimbingan_error').html('');
+            
+            if (data.jadwal_error['jam_bimbingan'] != '') $('#jam_bimbingan_error').html(data.jadwal_error['jam_bimbingan']);
+            else $('#jam_bimbingan_error').html('');
 
           }
 
@@ -191,6 +202,10 @@
             formTambahJadwal.trigger('reset');
             $('#modalAdd').modal('hide');
             $('#nama_peserta_error').html('');
+            $('#tanggal_mulai_error').html('');
+            $('#tanggal_selesai_error').html('');
+            $('#tanggal_bimbingan_error').html('');
+            $('#jam_bimbingan_error').html('');
             $('#example1').DataTable().ajax.reload();
 
             Swal.fire({
@@ -224,8 +239,9 @@
             url: url,
             method: "POST",
             success: function(response) {
-              $('#example1').DataTable().ajax.reload()
               toastr.info('Data Mentor berhasil dihapus.');
+              // Redirect ke halaman jadwalpeserta
+              window.location.href = "<?php echo base_url('jadwalpeserta'); ?>";
             }
           });
         }

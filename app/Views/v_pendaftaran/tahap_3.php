@@ -198,6 +198,9 @@
 
             if (res.tahap_tiga_error['berkas'] != '') $('#berkas_error').html(res.tahap_tiga_error['berkas']);
             else $('#berkas_error').html('');
+           
+            if (res.tahap_tiga_error['nda'] != '') $('#nda_error').html(res.tahap_tiga_error['nda']);
+            else $('#nda_error').html('');
 
             if (res.tahap_tiga_error['surat_permohonan'] != '') $('#surat_permohonan_error').html(res.tahap_tiga_error['surat_permohonan']);
             else $('#surat_permohonan_error').html('');
